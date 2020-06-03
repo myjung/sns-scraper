@@ -74,6 +74,7 @@ def get():
         ('ext', 'mediaStats,highlightedLabel,cameraMoment'),
     )
     response = requests.get('https://api.twitter.com/2/search/adaptive.json', headers=headers, params=params)
+    print(response.request.url)
     print(response.content.decode('utf-8'))
     content = json.loads(response.content)
     #pprint(content['globalObjects']['tweets'])

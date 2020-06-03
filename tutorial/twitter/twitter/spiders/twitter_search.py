@@ -8,7 +8,7 @@ description :
 https://api.twitter.com/1.1/guest/activate.json 로 post 메시지에 header에 authorization 토큰을 포함하여 보내면 
 게스트 토큰을 반환함
 -----------REQUEST---------------
-curl -X POST -H \
+curl -x localhost:8888 -X POST -H \
 'authorization: Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA' \
 -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36' \
 https://api.twitter.com/1.1/guest/activate.json
@@ -32,17 +32,33 @@ token 생성 이후 다음 내용을 헤더에 담아 uri에 param을 담아 get
 response : json object {}
 '''
 
+
 class SearchSpider(scrapy.Spider):
     name = 'Twitter Search'
     start_urls = ['https://api.twitter.com/1.1/guest/activate.json']
     custom_settings = {
-        'DEFAULT_REQUEST_HEADERS' : {
+        'DEFAULT_REQUEST_HEADERS': {
             'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36'
         }
     }
-    def parse(self):
+
+    def parse(self, response):
+        print(response)
         return
+
+    def get_token(self):
+        headers = {
+            'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36'
+        }
+        url = 'https://api.twitter.com/1.1/guest/activate.json'
+        yield JsonRequest(url=url, method='POST', headers=headers, callback=self.parse_token)
+
+    def parse_token(self, response):
+        print(response)
+
+
 '''
         headers = {
             'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
@@ -51,7 +67,6 @@ class SearchSpider(scrapy.Spider):
         url = 'https://api.twitter.com/1.1/guest/activate.json'
         JsonRequest(url=url, method='POST', headers=headers)
 '''
-
 
 
 def get_token():
@@ -64,7 +79,6 @@ def get_token():
     print(Response.status)
     print(Response)
 
+
 def main():
     get_token()
-
-

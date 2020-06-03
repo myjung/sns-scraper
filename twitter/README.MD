@@ -21,6 +21,17 @@ curl -X POST -H \
 https://api.twitter.com/1.1/guest/activate.json
 ```
 
+curl -x 34.64.222.87 -X POST -H \
+'authorization: Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA' \
+-A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36' \
+https://api.twitter.com/1.1/guest/activate.json
+#### token 생성 경로
+```
+curl 'https://twitter.com/search?q=%EB%82%A0%EA%B0%9C&src=typed_query' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36' \
+  --compressed|pcregrep -o1 'src="(.*?.js)\">' | sed '1,4d' | xargs curl | pcregrep --buffer-size=200000 -o1 '"AAAAA(.*?)"'
+```
+
 #### 응답 정보 : JSON
     {"guest_token" : "1258204706054127621"}
 
