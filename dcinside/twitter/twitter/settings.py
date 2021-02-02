@@ -18,11 +18,12 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 1
 RETRY_TIMES = 0
 
 # PROXY
-PROXY = 'http://127.0.0.1:8888/?noconnect'
+# test 용으로 구축했던 local scrapoxy 제거함
+# PROXY = 'http://127.0.0.1:8888/?noconnect'
 
-# SCRAPOXY
-API_SCRAPOXY = 'http://127.0.0.1:8889/api'
-API_SCRAPOXY_PASSWORD = '$cr@p3v3ryth1n9'
+# # SCRAPOXY
+# API_SCRAPOXY = 'http://127.0.0.1:8889/api'
+# API_SCRAPOXY_PASSWORD = '$cr@p3v3ryth1n9' 
 
 DOWNLOADER_MIDDLEWARES = {
     'scrapoxy.downloadmiddlewares.proxy.ProxyMiddleware': 100,

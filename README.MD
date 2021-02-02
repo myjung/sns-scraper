@@ -1,5 +1,8 @@
-# twitter spider 개요
+# twitter, instagram, dcinside 스크래퍼 프로젝트
+ 인스타그램과 트위터 dcinside 웹 요청을 분석하여 스크래핑하는 스파이더와 일반 requests를 활용한 스크래핑 코드입니다.
 
+
+## twitter spider 작동 방식
 ### 1. TOKEN 생성
 
 #### 요청 URL >>> https://api.twitter.com/1.1/guest/activate.json
